@@ -17,6 +17,14 @@
 		8BB0B023221F70AE000FE88D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B021221F70AE000FE88D /* LaunchScreen.storyboard */; };
 		8BB0B02C221F7386000FE88D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB0B02A221F7386000FE88D /* Model.swift */; };
 		8BB0B02D221F7386000FE88D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB0B02B221F7386000FE88D /* Utils.swift */; };
+		8BB0B035221F96AD000FE88D /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB0B031221F96AD000FE88D /* GameObject.swift */; };
+		8BB0B038221F96FE000FE88D /* QuestionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB0B037221F96FE000FE88D /* QuestionBox.swift */; };
+		8BB0B04222209FD4000FE88D /* star_theme.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B03C22209FD4000FE88D /* star_theme.wav */; };
+		8BB0B04322209FD4000FE88D /* smw_1up.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B03D22209FD4000FE88D /* smw_1up.wav */; };
+		8BB0B04422209FD4000FE88D /* smw_spring_jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B03E22209FD4000FE88D /* smw_spring_jump.wav */; };
+		8BB0B04522209FD4000FE88D /* smw_bonus_game_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B03F22209FD4000FE88D /* smw_bonus_game_end.wav */; };
+		8BB0B04622209FD4000FE88D /* smw_game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B04022209FD4000FE88D /* smw_game_over.wav */; };
+		8BB0B04722209FD4000FE88D /* smw_vine.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8BB0B04122209FD4000FE88D /* smw_vine.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +40,14 @@
 		8BB0B024221F70AE000FE88D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB0B02A221F7386000FE88D /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8BB0B02B221F7386000FE88D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		8BB0B031221F96AD000FE88D /* GameObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		8BB0B037221F96FE000FE88D /* QuestionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionBox.swift; sourceTree = "<group>"; };
+		8BB0B03C22209FD4000FE88D /* star_theme.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = star_theme.wav; sourceTree = "<group>"; };
+		8BB0B03D22209FD4000FE88D /* smw_1up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smw_1up.wav; sourceTree = "<group>"; };
+		8BB0B03E22209FD4000FE88D /* smw_spring_jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smw_spring_jump.wav; sourceTree = "<group>"; };
+		8BB0B03F22209FD4000FE88D /* smw_bonus_game_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smw_bonus_game_end.wav; sourceTree = "<group>"; };
+		8BB0B04022209FD4000FE88D /* smw_game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smw_game_over.wav; sourceTree = "<group>"; };
+		8BB0B04122209FD4000FE88D /* smw_vine.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = smw_vine.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +80,8 @@
 		8BB0B011221F70AB000FE88D /* Mid-Term-Test1 */ = {
 			isa = PBXGroup;
 			children = (
+				8BB0B03B22209FBF000FE88D /* Sounds */,
+				8BB0B02E221F963D000FE88D /* Objects */,
 				8BB0B02A221F7386000FE88D /* Model.swift */,
 				8BB0B02B221F7386000FE88D /* Utils.swift */,
 				8BB0B012221F70AB000FE88D /* AppDelegate.swift */,
@@ -77,6 +95,29 @@
 				8BB0B024221F70AE000FE88D /* Info.plist */,
 			);
 			path = "Mid-Term-Test1";
+			sourceTree = "<group>";
+		};
+		8BB0B02E221F963D000FE88D /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				8BB0B037221F96FE000FE88D /* QuestionBox.swift */,
+				8BB0B031221F96AD000FE88D /* GameObject.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		8BB0B03B22209FBF000FE88D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8BB0B03D22209FD4000FE88D /* smw_1up.wav */,
+				8BB0B03F22209FD4000FE88D /* smw_bonus_game_end.wav */,
+				8BB0B04022209FD4000FE88D /* smw_game_over.wav */,
+				8BB0B03E22209FD4000FE88D /* smw_spring_jump.wav */,
+				8BB0B04122209FD4000FE88D /* smw_vine.wav */,
+				8BB0B03C22209FD4000FE88D /* star_theme.wav */,
+			);
+			name = Sounds;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +178,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BB0B04522209FD4000FE88D /* smw_bonus_game_end.wav in Resources */,
 				8BB0B01E221F70AB000FE88D /* Main.storyboard in Resources */,
+				8BB0B04222209FD4000FE88D /* star_theme.wav in Resources */,
+				8BB0B04322209FD4000FE88D /* smw_1up.wav in Resources */,
+				8BB0B04422209FD4000FE88D /* smw_spring_jump.wav in Resources */,
+				8BB0B04622209FD4000FE88D /* smw_game_over.wav in Resources */,
 				8BB0B015221F70AB000FE88D /* GameScene.sks in Resources */,
+				8BB0B04722209FD4000FE88D /* smw_vine.wav in Resources */,
 				8BB0B020221F70AE000FE88D /* Assets.xcassets in Resources */,
 				8BB0B023221F70AE000FE88D /* LaunchScreen.storyboard in Resources */,
 				8BB0B017221F70AB000FE88D /* Actions.sks in Resources */,
@@ -155,6 +202,8 @@
 				8BB0B02D221F7386000FE88D /* Utils.swift in Sources */,
 				8BB0B019221F70AB000FE88D /* GameScene.swift in Sources */,
 				8BB0B01B221F70AB000FE88D /* GameViewController.swift in Sources */,
+				8BB0B035221F96AD000FE88D /* GameObject.swift in Sources */,
+				8BB0B038221F96FE000FE88D /* QuestionBox.swift in Sources */,
 				8BB0B013221F70AB000FE88D /* AppDelegate.swift in Sources */,
 				8BB0B02C221F7386000FE88D /* Model.swift in Sources */,
 			);

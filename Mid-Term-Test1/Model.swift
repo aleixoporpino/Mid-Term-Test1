@@ -10,6 +10,9 @@
 
 import UIKit
 import AVFoundation
+import SpriteKit
+import GameplayKit
+
 class Model {
     
     fileprivate static let modelInstance = Model()
@@ -31,7 +34,7 @@ class Model {
     }
     
     // Function used to update the player's coins
-    func updateCoins(label : UILabel, coins amount : Int) {
+    func updateCoins(label : SKLabelNode, coins amount : Int) {
         label.text = "x\(Int(amount))"
         UserDefaults.standard.set(amount, forKey: Constant.player_coins)
     }
