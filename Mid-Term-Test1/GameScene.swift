@@ -32,7 +32,7 @@ class GameScene: SKScene {
     var star = 0
     var bowser = 0
     var betLine = ["slot03", "slot03", "slot03"]
-    var maximumValue = 1000
+    var maximumBet = 100
     var currentBet = 10
     var powEnabled = true
     
@@ -69,8 +69,6 @@ class GameScene: SKScene {
         } else {
             lblCoins.text = "x\(Model.instance.getLatestCoins())"
         }
-        
-        maximumValue = currentCoins
         
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: self.size.width * 0.5, y: self.size.height * 0.5)
@@ -155,7 +153,7 @@ class GameScene: SKScene {
         lblBet.fontColor = SKColor.black
         self.addChild(lblBet)
         
-        lblBetMinus.position = CGPoint(x: self.size.width * 0.45, y: self.size.height * 0.13)
+        lblBetMinus.position = CGPoint(x: self.size.width * 0.43, y: self.size.height * 0.13)
         lblBetMinus.zPosition = 2
         lblBetMinus.text = "-"
         lblBetMinus.name = "betMinus"
@@ -249,15 +247,19 @@ class GameScene: SKScene {
             } else if tappedNode.name == "pow" && powEnabled {
                 spin()
             } else if tappedNode.name == "betPlus" {
-                maximumValue = currentCoins
-                let amount = currentBet + 10
+                if currentCoins < maximumBet {
+                    maximumBet = currentCoins
+                }
+                var amount = currentBet + 10
+                if amount > maximumBet {
+                    amount = maximumBet
+                }
                 if currentCoins >= amount {
                     betCoins = amount
                     lblBet.text = "Bet x\(amount)"
                     currentBet = amount
                 }
             } else if tappedNode.name == "betMinus" {
-                maximumValue = currentCoins
                 let amount = currentBet - 10
                 if amount > 0 {
                     if currentCoins >= amount {
@@ -290,11 +292,6 @@ class GameScene: SKScene {
         objResult1.texture = SKTexture(imageNamed: betLine[0])
         objResult2.texture = SKTexture(imageNamed: betLine[1])
         objResult3.texture = SKTexture(imageNamed: betLine[2])
-        //objResult1.position.y = objBlock1.position.y + objBlock1.size.height + 20
-        //objResult2.position.y = objBlock1.position.y + objBlock1.size.height + 20
-        //objResult3.position.y = objBlock1.position.y + objBlock1.size.height + 20
-        Model.instance.playSound(sound: Constant.smw_vine)
-        
         
         let moveItemsOutOfTheBlock = SKAction.moveTo(y: objBlock1.position.y + objBlock1.size.height + 20, duration: 1)
         
@@ -313,25 +310,21 @@ class GameScene: SKScene {
         objResult2.run(startGameSequence)
         objResult3.run(startGameSequence)
         
-        self.determineWinnings()
-        self.updatePlayerStatus()
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let initialSound = SKAction.run {
+            Model.instance.playSound(sound: Constant.smw_vine)
+        }
         
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let initialMove = SKAction.moveTo(x: self.pow.position.x, duration: 1)
         
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let finishMove = SKAction.run {
+            self.determineWinnings()
+            self.updatePlayerStatus()
+        }
         
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        let finishGameSequence = SKAction.sequence([initialSound,initialMove, finishMove])
+        
+        pow.run(finishGameSequence)
+        
     }
     
     /* When this function is called it determines the betLine results. */
@@ -484,16 +477,16 @@ class GameScene: SKScene {
     func checkJackPot() {
         let jackPotTry = Int(arc4random_uniform(UInt32(51))) + 1
         let jackPotWin = Int(arc4random_uniform(UInt32(51))) + 1
+        //let jackPotTry = 1
+        //let jackPotWin = 1
         if (jackPotTry == jackPotWin) {
             Model.instance.playSound(sound: Constant.star_theme)
-            let alert = UIAlertController(title: "JACKPOT!!", message: "You won the $\(jackpot) Jackpot!!", preferredStyle: .alert)
-            alert.addAction( UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                Model.instance.updateCoins(label: self.lblCoins, coins: (self.currentCoins + self.jackpot))
-                self.jackpot = 1000
-                self.lblJackpot.text = "Jackpot: \(self.jackpot)"
-            }))
-            //present(alert, animated: true, completion: nil)
+            lblToadSpeak.text = "$\(self.jackpot) JACKPOT!!"
+            Model.instance.updateCoins(label: self.lblCoins, coins: (self.currentCoins + self.jackpot))
+            self.jackpot = 1000
+            self.lblJackpot.text = "Jackpot: \(self.jackpot)"
         }
+        
     }
     
     // Show Game Over alert and restart the game
@@ -510,33 +503,26 @@ class GameScene: SKScene {
     
     func reset() {
         Model.instance.playSound(sound: Constant.smw_bonus_game_end)
+        Model.instance.playSound(sound: Constant.overworld)
         
-        //        UIView.animate(withDuration: 3, animations: {self.imgToad.frame.origin.x += 30}, completion: nil)
-        //UIView.animate(withDuration: 4, animations: {self.imgCharacter.frame.origin.x -= 200}, completion: {(finished:Bool) in
-            Model.instance.playSound(sound: Constant.overworld)
-            
-            if self.itemsOut {
-                objResult1.position.y -= objBlock2.size.height + 20
-                objResult2.position.y -= objBlock2.size.height + 20
-                objResult3.position.y -= objBlock2.size.height + 20
-                self.itemsOut = false
-            }
-            
-            objBlock1.texture = SKTexture(imageNamed: "Question_Block_Art_-_New_Super_Mario_Bros")
-            objBlock2.texture = SKTexture(imageNamed: "Question_Block_Art_-_New_Super_Mario_Bros")
-            objBlock3.texture = SKTexture(imageNamed: "Question_Block_Art_-_New_Super_Mario_Bros")
-            lblToadSpeak.text = "GOOD LUCK!"
-            
-            Model.instance.deletePreviousSave()
-            self.startSlothMachine()
-            self.resetResultOutcomes()
-            self.resetPlayerStats()
-            currentBet = 10
+        if self.itemsOut {
+            objResult1.position.y -= objBlock2.size.height + 20
+            objResult2.position.y -= objBlock2.size.height + 20
+            objResult3.position.y -= objBlock2.size.height + 20
+            self.itemsOut = false
+        }
+        
+        objBlock1.texture = SKTexture(imageNamed: "Question_Block_Art_-_New_Super_Mario_Bros")
+        objBlock2.texture = SKTexture(imageNamed: "Question_Block_Art_-_New_Super_Mario_Bros")
+        objBlock3.texture = SKTexture(imageNamed: "Question_Block_Art_-_New_Super_Mario_Bros")
+        lblToadSpeak.text = "GOOD LUCK!"
+        
+        Model.instance.deletePreviousSave()
+        self.startSlothMachine()
+        self.resetResultOutcomes()
+        self.resetPlayerStats()
+        currentBet = 10
         lblBet.text = "Bet x\(currentBet)"
-            //self.changeCharacter()
-            //UIView.animate(withDuration: 4, animations: {self.imgCharacter.frame.origin.x += 200}, completion: {(finished:Bool) in
-            //})
-        //})
     }
     
     /* Utility function to reset all the previous result outcomes */
